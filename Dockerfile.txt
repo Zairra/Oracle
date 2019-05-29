@@ -1,0 +1,10 @@
+FROM oraclelinux:7-slim
+MAINTAINER A N Other <another@example.com>
+RUN yum -y install httpd
+RUN echo "HTTP server running on guest" > /var/www/html/index.html
+RUN yum -y update
+RUN cd /var/www/html &&\
+    rm -f index.html
+Copy  . /var/www/html/
+ENTRYPOINT /usr/sbin/httpd -D FOREGROUND
+EXPOSE 80
